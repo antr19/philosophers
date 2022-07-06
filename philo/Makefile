@@ -12,7 +12,7 @@
 
 NAME = 	philo
 
-SRCS =	philo.c utils.c init.c
+SRCS =	main.c utils.c init.c
 OBJS = 	$(SRCS:.c=.o)
 
 HEAD =	philo.h
@@ -24,17 +24,19 @@ RM = 	rm -f
 all:	$(NAME)
 
 run: $(NAME)
-	@./$(NAME)
-	leaks --atExit -- ./$(NAME)
+# 	@./$(NAME) 5 800 200 200
+#	@./$(NAME) 4 410 200 200
+	@./$(NAME) 4 310 200 200
+#	leaks --atExit -- ./$(NAME) 4 310 200 200
 
-$(NAME): $(OBJS)
-	$(CC) $(FLAGS) $(OBJS) -o $(NAME)
+$(NAME): $(OBJS) $(HEAD)
+	$(CC) $(FLAGS) $(OBJS) -I $(HEAD) -o $(NAME)
 
 
 bonus: $(NAME)
 
 .c.o: $(HEAD)
-	$(CC) $(FLAGS) -Imlx  -c $< -o $(<:.c=.o)
+	$(CC) $(FLAGS) -c $< -o $(<:.c=.o)
 
 clean:
 	${RM} ${OBJS} $(B_OBJS)

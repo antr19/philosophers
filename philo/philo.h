@@ -6,12 +6,15 @@
 /*   By: fmarsha <fmarsha@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 23:44:11 by fmarsha           #+#    #+#             */
-/*   Updated: 2022/07/01 23:29:45 by fmarsha          ###   ########.fr       */
+/*   Updated: 2022/07/03 15:15:44 by fmarsha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
+
+# include <pthread.h>
+# include <stdlib.h>
 
 struct	s_rules;
 
@@ -42,6 +45,10 @@ typedef struct s_rules
 	t_philosopher		*philosophers;
 }						t_rules;
 
-void	init(t_rules *r);
-
+int			init(t_rules *r, char **s);
+long long	timestamp(void);
+void		action_print(t_rules *rules, int id, char *string);
+void		ft_sleep(long long time, t_rules *rules);
+int			write_error(char *s);
+int			ft_atoi(const char *str);
 #endif
